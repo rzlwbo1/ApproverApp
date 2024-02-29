@@ -104,9 +104,8 @@ async function getContacts() {
 
   try {
     const contact = await navigator.contacts.select(props, opts);
-    ApproverVal.value = `@${contact.name[0]}`
-    console.log({contact})
-    // alert(JSON.stringify(contacts));
+    ApproverVal.value = `@${contact.name}`
+    alert(contact)
   } catch (err) {
     alert(err);
   }
