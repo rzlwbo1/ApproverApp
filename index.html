@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Approval WebApp</title>
+</head>
+<body>
+  
+  <main>
+
+    <h2>Request Approval Generator</h2>
+
+    <form id="FormApp">
+      <div>
+        <label>User AD</label>
+        <input type="text" placeholder="ex : AB12345" maxlength="7" id="AD" required/>
+      </div>
+
+      <div>
+        <label>Platform</label>
+        <input type="text" placeholder="ex : CyberArk" id="Platform" required/>
+      </div>
+
+      <div>
+        <label>Tujuan</label>
+        <textarea type="text" placeholder="ex : Checking Log" id="Tujuan" required></textarea>
+      </div>
+
+      <div>
+        <label>Approver</label>
+        <input type="text" placeholder="ex : Andreas" id="Approver" required/>
+      </div>
+
+      <button type="submit" class="btn-generate">Generate</button>
+
+    </form>
+
+
+    <div id="Preview">
+      <button class="btn-copy" disabled>Copy</button>
+      <p class="text-preview">Belum ada preview</p>
+    </div>
+
+  </main>
+
+  <script src="./script.js"></script>
+</body>
+</html>
