@@ -3,9 +3,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
   let formAppove = document.querySelector("form");
   let btnCopy = document.querySelector(".btn-copy");
+  let btnShare = document.querySelector(".btn-share");
+  let btnContact = document.querySelector(".btn-contact");
 
   formAppove.addEventListener("submit", generateText);
-  btnCopy.addEventListener("click", copyText)
+  btnCopy.addEventListener("click", copyText);
+  btnShare.addEventListener("click", shareToWa);
+  btnContact.addEventListener("click", openContactPicker);
 
 })
 
@@ -20,13 +24,15 @@ function generateText(ev) {
 
   let preview = document.querySelector(".text-preview");
   let btnCopy = document.querySelector(".btn-copy");
+  let btnShare = document.querySelector(".btn-share");
 
 
-  let template = `Selamat ${getTime()} pak/bu ${ApproverVal} mohon bantuannya approval ${PlatformVal} dengan user AD ${ADVal.toUpperCase()} untuk ${TujuanVal}`;
+  let template = `Selamat ${getTime()} pak/bu ${ApproverVal} mohon bantuannya approval ${PlatformVal} dengan user AD ${ADVal.toUpperCase()} untuk ${TujuanVal} terimakasih 🙏🙏.`;
 
 
   preview.innerHTML = template
   btnCopy.disabled = false;
+  btnShare.disabled = false;
 
 }
 
@@ -65,4 +71,43 @@ async function copyText() {
   } catch (err) {
     console.error('Failed to copy: ', err);
   }  
+}
+
+
+function shareToWa() {
+
+  let preview = document.querySelector(".text-preview").textContent;
+  let waUrl = `https://api.whatsapp.com/send?text=${preview}`
+
+  window.open(waUrl, '_blank')
+}
+
+
+function openContactPicker() {
+  const supported = "contacts" in navigator && "ContactsManager" in window;
+
+  if (supported) {
+    getContacts();
+  } else {
+    alert(
+      "Contact list API not supported!. Only for android mobile chrome and chrome version > 80"
+    );
+  }
+}
+
+
+async function getContacts() {
+  const props = ["name", "tel"];
+  const opts = { multiple: false };
+
+  let ApproverVal = document.getElementById("Approver");
+
+  try {
+    const contact = await navigator.contacts.select(props, opts);
+    ApproverVal.value = `@${contact.name}`
+    console.log({contact})
+    // alert(JSON.stringify(contacts));
+  } catch (err) {
+    alert(err);
+  }
 }
